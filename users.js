@@ -92,7 +92,6 @@ var getUsers = function(req,callback){
     MongoClient.connect(mongoUrl,function(err,db){
         var collection = db.collection('profile');
         var filter = buildFilter(req);
-        console.log(filter);
         collection.find(filter,{"limit":limit,"skip":skip}).toArray(function(err,data){
             db.close();
            callback(data);

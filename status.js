@@ -11,5 +11,6 @@ module.exports.mongoStatus = function(callback){
             return;
         }
         callback(false);
+        return;
     });
-}
+};
