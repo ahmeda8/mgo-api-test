@@ -1,8 +1,8 @@
 conn  = new Mongo();
-db = conn.getDB("mgo");
+/*db = conn.getDB();
 db.dropDatabase();
 db = conn.getDB("mgo");
-
+*/
 bulk = [
   {
     "email": "estersolomon@terrago.com",
