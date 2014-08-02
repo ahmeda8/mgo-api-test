@@ -12,9 +12,16 @@ var diskio = require ('./diskio.js');
 Endpoints for user authentication
 */
 
-app.get('/user/auth',function(req,res){
+var getApiEndpoint =function(path){
+    var apiBaseUrlPattern = "/api/:version";
+    return apiBaseUrlPattern+"/"+path
+};
+
+app.get(getApiEndpoint("user/auth"),function(req,res){
     var user = req.query.user;
     var pass = req.query.pass;
+    var version = req.param('version');
+    console.log("API Version="+version);
     users.authUser(user,pass,function(reslt){
         if(reslt)
             res.send(JSON.stringify(reslt));
@@ -23,10 +30,12 @@ app.get('/user/auth',function(req,res){
     });
 });
 
-app.post('/user/auth',function(req,res){
-    //console.log(JSON.stringify(req.body));
-     var user = req.body.user;
+app.post(getApiEndpoint('user/auth'),function(req,res){
+    var user = req.body.user;
     var pass = req.body.pass;
+    var version = req.param('version');
+    console.log("API Version="+version);
+    
     users.authUser(user,pass,function(reslt){
         if(reslt)
             res.send(JSON.stringify(reslt));
@@ -35,7 +44,9 @@ app.post('/user/auth',function(req,res){
     });
 });
 
-app.post('/user',function(req,res){
+app.post(getApiEndpoint('user'),function(req,res){
+    var version = req.param('version');
+    console.log("API Version="+version);
     users.createUser(req.query.user,req.query.pass,function(data){
         if(data == false){
             res.send('Not Created '+JSON.stringify(req.query.user));
@@ -49,7 +60,9 @@ app.post('/user',function(req,res){
 /*
 Endpoint to retrieve filtered user info, and pagination included
 */
-app.get('/users',function(req,res){
+app.get(getApiEndpoint('users'),function(req,res){
+    var version = req.param('version');
+    console.log("API Version="+version);
     users.getUsers(req,function(data){
        res.send(data);
     });
@@ -58,7 +71,9 @@ app.get('/users',function(req,res){
 Endpoint for server status
 */
 var status = require('./status.js');
-app.get('/status',function(req,res){
+app.get(getApiEndpoint('status'),function(req,res){
+    var version = req.param('version');
+    console.log("API Version="+version);
     status.mongoStatus(function(result){
        res.send(result);
     });
@@ -66,7 +81,9 @@ app.get('/status',function(req,res){
 /*
 Endpoints for file listings
 */
-app.get('/listdir',function(req,res){
+app.get(getApiEndpoint('listdir'),function(req,res){
+    var version = req.param('version');
+    console.log("API Version="+version);
     var path = "/"+req.query.path;
     diskio.listall(path,function(err,files){
         res.send(JSON.stringify(files));
@@ -74,7 +91,9 @@ app.get('/listdir',function(req,res){
     //res.send("path = "+path);
 });
 
-app.get('/listfiles',function(req,res){
+app.get(getApiEndpoint('listfiles'),function(req,res){
+    var version = req.param('version');
+    console.log("API Version="+version);
     var path = "/"+req.query.path;
     diskio.listfiles(path,function(files){
         res.send(JSON.stringify(files));

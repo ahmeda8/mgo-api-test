@@ -31,8 +31,10 @@ var buildFilter = function (req){
     var filter = {};
     if(null != req.query.gender)
         filter.gender = req.query.gender;
-    if(null != req.query.age)
-        filter.age = req.query.age;
+    if(null != req.query.age){
+        filter.age = parseInt(req.query.age);
+    }
+        
     return filter;
 };
 
@@ -90,9 +92,8 @@ var getUsers = function(req,callback){
     MongoClient.connect(mongoUrl,function(err,db){
         var collection = db.collection('profile');
         var filter = buildFilter(req);
+        console.log(filter);
         collection.find(filter,{"limit":limit,"skip":skip}).toArray(function(err,data){
-            console.error(err);
-            //console.log(data);
             db.close();
            callback(data);
         });
