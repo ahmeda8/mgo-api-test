@@ -100,4 +100,6 @@ app.get(getApiEndpoint('listfiles'),function(req,res){
     });
     //res.send("path = "+path);
 });
-app.listen(3000);
+
+var port = Number(process.env.PORT || 5000);
+app.listen(port);
