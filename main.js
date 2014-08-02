@@ -4,7 +4,7 @@ var app = express();
 //app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
 //setup some constants
-process.env.mongoUrl = "mongodb://localhost:27017/mgo";
+process.env.mongoUrl = (process.env.MONGOHQ_URL)? process.env.MONGOHQ_URL :"mongodb://localhost:27017/mgo";
 
 var users = require ('./users.js');
 var diskio = require ('./diskio.js');
