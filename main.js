@@ -1,5 +1,8 @@
 var express = require('express');
+var bodyParser = require('body-parser');
 var app = express();
+//app.use(bodyParser.urlencoded({extended:false}));
+app.use(bodyParser.json());
 //setup some constants
 process.env.mongoUrl = "mongodb://localhost:27017/mgo";
 
@@ -12,6 +15,18 @@ Endpoints for user authentication
 app.get('/user/auth',function(req,res){
     var user = req.query.user;
     var pass = req.query.pass;
+    users.authUser(user,pass,function(reslt){
+        if(reslt)
+            res.send(JSON.stringify(reslt));
+        else
+            res.status(401).send(JSON.stringify(reslt));
+    });
+});
+
+app.post('/user/auth',function(req,res){
+    //console.log(JSON.stringify(req.body));
+     var user = req.body.user;
+    var pass = req.body.pass;
     users.authUser(user,pass,function(reslt){
         if(reslt)
             res.send(JSON.stringify(reslt));

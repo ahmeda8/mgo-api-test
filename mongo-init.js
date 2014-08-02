@@ -217,7 +217,7 @@ bulk = [
 ];
 
 bulk.forEach(function(item){
-    db.users.insert({user_id:item.email,password:"12345"});
+    db.users.insert({user_id:item.email,password:"8b072b44590e5d3aa5a09e70ce5e0bdfc68e93bc"});
     item.user_id = db.users.findOne({user_id:item.email})._id;    
     db.profile.insert(item);
 });
