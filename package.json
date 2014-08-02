@@ -4,12 +4,25 @@
   "description": "Interview step 1",
   "main": "main.js",
   "dependencies": {
-    "mongodb": "~1.4.8"
+    "mongodb": "~1.4.8",
+    "express": "~4.7.2",
+    "body-parser": "~1.5.2"
+    
   },
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "BSD-2-Clause"
+  "author": "Abrar Ahmed",
+  "license": "BSD-2-Clause",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/ahmeda8/mgo-api-test.git"
+  },
+  "keywords": [
+    "Interview"
+  ],
+  "bugs": {
+    "url": "https://github.com/ahmeda8/mgo-api-test/issues"
+  }
 }
