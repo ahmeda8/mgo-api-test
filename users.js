@@ -3,7 +3,7 @@ This file contains all queries for a user
 */
 var MongoClient = require('mongodb').MongoClient;
 var crypt = require('crypto');
-var mongoUrl = 'mongodb://localhost:27017/test';
+var mongoUrl = process.env.mongoUrl;
 
 
 var encryptPassword = function (password){
@@ -16,15 +16,24 @@ var encryptPassword = function (password){
 }
 
 var buildPayload = function(username,password){
-    if(password.length > 0)
-        password = encryptPassword(password);
-    return {user:username,password:password};
+    if(null != password && password.length > 0)
+        password = encryptPassword(password);        
+    return {user_id:username,password:password};
 };
 
 var verifyPayload = function(payload){
- if(null != payload.user && null != payload.password && payload.user.length > 0 && payload.password.length > 0)
+ if(null != payload.user_id && null != payload.password && payload.user_id.length > 0 && payload.password.length > 0)
     return true;
  return false;
+};
+
+var buildFilter = function (req){
+    var filter = {};
+    if(null != req.query.gender)
+        filter.gender = req.query.gender;
+    if(null != req.query.age)
+        filter.age = req.query.age;
+    return filter;
 };
 
 var authUser = function (username,password,callback) {
@@ -37,7 +46,7 @@ var authUser = function (username,password,callback) {
     MongoClient.connect(mongoUrl,function(err,db){
         var collection = db.collection('users');
         collection.findOne(payload,function(err,user){
-            console.log(user);
+            //console.log(user);
             db.close();
             if(null != user)
                 callback(true);
@@ -62,12 +71,31 @@ var createUser = function (username, password,callback) {
             console.log(err);
             console.log(docs);
             if(null != err){
+                db.close();
                 callback(false);
                 return;
             }
+            db.close();
             callback(payload);
             return;
         });
     });
 };
 module.exports.createUser = createUser;
+
+var getUsers = function(req,callback){
+    var limit = (null != req.query.limit) ? req.query.limit : 10;
+    var page = (null != req.query.page) ? --req.query.page : 0;
+    var skip = limit * page;
+    MongoClient.connect(mongoUrl,function(err,db){
+        var collection = db.collection('profile');
+        var filter = buildFilter(req);
+        collection.find(filter,{"limit":limit,"skip":skip}).toArray(function(err,data){
+            console.error(err);
+            //console.log(data);
+            db.close();
+           callback(data);
+        });
+    });
+};
+module.exports.getUsers = getUsers;
