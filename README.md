@@ -24,14 +24,14 @@ Running the server
 Alternate test instance
 =======================
 If you cannot setup the server , this code has been uploaded to heroku, and have a running instance for you to test.
-The host for the heroku instance is below.
+The host for the heroku instance is 
 	http://mgo-interview.herokuapp.com
-use the above url as base url for the apis, listed below.
+use this url as base url for the apis, listed below.
 
 List of available endpoints
 ===========================
 
-if the setup was done correctly the baseurl for the app should be as below.
+if the setup was done correctly the baseurl for the app should be as follows.
 	http://localhost:5000/
 
 Authenticate a user.
