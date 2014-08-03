@@ -80,7 +80,7 @@ System Requirement
 -------------------
 
 1. installed and working nodeunit, this will get installed with the package install
-2. nodeunit requires a working nodejs engine, with executable named as node
+2. nodeunit requires a working nodejs engine, with executable named as *node*
 
 Running the unit tests
 -----------------------
@@ -88,7 +88,7 @@ run the following command to start unit testing.
 
 	nodeunit test.js
 
-unit test includes 8 assertions, to test the followinf, 
+unit test includes 8 assertions, to test the following. 
 - user authentication.
 - user profile.
 - retrieving files.
