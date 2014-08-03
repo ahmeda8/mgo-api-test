@@ -31,7 +31,7 @@ use the above url as base url for the apis, listed below.
 List of available endpoints
 ===========================
 
-if the setup was done correctly the baseurl for the app should be as below
+if the setup was done correctly the baseurl for the app should be as below.
 	http://localhost:5000/
 
 Authenticate a user.
