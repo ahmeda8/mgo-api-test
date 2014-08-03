@@ -18,13 +18,14 @@ var onlyFiles = function (path,callback){
                     if(stats.isFile()){
                         fileList.push(item);
                     }
-                    else{
-                        console.error("Read Files err-"+err);
-                    }
+                    
                     if(++index >= files.length){
                         callback(fileList);
                         return;
                     }
+                }
+                else{
+                    console.error("Read Files err-"+err);
                 }
             });
         });
