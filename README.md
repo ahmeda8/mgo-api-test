@@ -40,8 +40,8 @@ List All users
 - params
 - gender = {male/female}, {optional}
 - age = {integer},{optional}
-- limit = {number of records to retrieve}
-- page = {page number to retrieve}
+- limit = {number of records to retrieve} {optional,default = 10}
+- page = {page number to retrieve} {optional}
 - eg: GET /api/1.0/users?gender=male&age=22&limit=15&page=2
 - return : json array of all user info
 
