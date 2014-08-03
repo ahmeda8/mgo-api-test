@@ -1,7 +1,7 @@
 mgo-api-test
 ============
 
-NodeJS implementation for some test apis
+This is the solution for the interview problem, the reason to choose NodeJS and mongoDB is simple, nodeJS is the upcoming language with non blocking and fast operation, mongoDB complements the use of json with nodeJs and removes a layer for interpreting the data.
 
 System Requirements
 ===================
@@ -21,8 +21,18 @@ Running the server
 ------------------
 	node main.js // to run the server, if node is not available try nodejs command
 
+Alternate test instance
+=======================
+If you cannot setup the server , this code has been uploaded to heroku, and have a running instance for you to test.
+The host for the heroku instance is below.
+	http://mgo-interview.herokuapp.com
+use the above url as base url for the apis, listed below.
+
 List of available endpoints
 ===========================
+
+if the setup was done correctly the baseurl for the app should be as below
+	http://localhost:5000/
 
 Authenticate a user.
 -----------------------
