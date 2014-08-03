@@ -18,31 +18,32 @@ Setup on local machine
 2. run npm install, this will install the nodejs dependencies for the software.
 
 Running the server
+------------------
 1. node main.js // to run the server, if node is not available try nodejs command
 
 List of available endpoints
 ===========================
 
-1. Authenticate a user
-path= /api/1.0/user/auth
-method= GET / POST , both supported
-params for POST - json payload in format {"user":"estersolomon@terrago.com","pass":"12345"}, content-type -application/json
-params for GET -, user=estersolomon@terrago.com&pass=12345
+- Authenticate a user.
+-----------------------
+- path= /api/1.0/user/auth
+- method= GET / POST , both supported
+- params for POST - json payload in format {"user":"estersolomon@terrago.com","pass":"12345"}, content-type -application/json
+- params for GET -, user=estersolomon@terrago.com&pass=12345
+- eg: GET /api/1.0/user/auth?user=estersolomon@terrago.com&pass=12345
+- return Boolean , true = authenticated, false=not authenticated
 
-eg: GET /api/1.0/user/auth?user=estersolomon@terrago.com&pass=12345
-return Boolean , true = authenticated, false=not authenticated
-
-2. List All users
-path= /api/1.0/users
-method= GET
-params=
-gender= {male/female}, {optional}
-age ={integer},{optional}
-limit = {number of records to retrieve}
-page= {page number to retrieve}
-
-eg: GET /api/1.0/users?gender=male&age=22&limit=15&page=2
-return : json array of all user info
+- List All users
+-----------------
+- path= /api/1.0/users
+- method= GET
+- params
+- gender = {male/female}, {optional}
+- age = {integer},{optional}
+- limit = {number of records to retrieve}
+- page = {page number to retrieve}
+- eg: GET /api/1.0/users?gender=male&age=22&limit=15&page=2
+- return : json array of all user info
 
 3. Get System Status
 path= /api/1.0/status
