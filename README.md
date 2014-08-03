@@ -42,7 +42,7 @@ Authenticate a user.
 - params for GET -, user=estersolomon@terrago.com&pass=12345
 - eg: GET /api/1.0/user/auth?user=estersolomon@terrago.com&pass=12345
 - return Boolean , true = authenticated, false=not authenticated
-- **Live Example: http://mgo-interview.herokuapp.com/api/2.0/user/auth?user=latoyaflores@speedbolt.com&pass=12345**
+- **Live Example: http://mgo-interview.herokuapp.com/api/1.0/user/auth?user=latoyaflores@speedbolt.com&pass=12345**
 
 
 List All users
@@ -74,7 +74,7 @@ List a directory content
 - path={directory path to retrieve list from}
 - eg: GET /api/1.0/listdir?path=/var
 - return : list of files and folders in the directory
-- **Live Example: http://mgo-interview.herokuapp.com/api/2.0/listfiles?path=/app**
+- **Live Example: http://mgo-interview.herokuapp.com/api/1.0/listfiles?path=/app**
 
 Unit Tests
 ===========
