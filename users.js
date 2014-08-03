@@ -17,7 +17,7 @@ var encryptPassword = function (password){
 
 var buildPayload = function(username,password){
     if(null != password && password.length > 0)
-        password = encryptPassword(password);        
+        password = encryptPassword(password);     
     return {user_id:username,password:password};
 };
 
@@ -40,6 +40,7 @@ var buildFilter = function (req){
 
 var authUser = function (username,password,callback) {
     var payload = buildPayload(username,password);
+    console.log("Auth user with Payload-"+JSON.stringify(payload));
     if(!verifyPayload(payload)){
         callback(false);
         return;
@@ -48,7 +49,7 @@ var authUser = function (username,password,callback) {
     MongoClient.connect(mongoUrl,function(err,db){
         var collection = db.collection('users');
         collection.findOne(payload,function(err,user){
-            //console.log(user);
+            console.error("Auth user err-"+err);
             db.close();
             if(null != user)
                 callback(true);
@@ -64,14 +65,15 @@ var createUser = function (username, password,callback) {
     MongoClient.connect(mongoUrl,function(err,db){
         var collection = db.collection('users');
         var payload = buildPayload(username,password);
+        console.log("Create user payload - "+JSON.stringify(payload));
         if(!verifyPayload(payload)) {
             callback(false);
             return;
         }
             
         collection.insert(payload,function(err,docs){
-            console.log(err);
-            console.log(docs);
+            console.error("Create user err-"+err);
+            console.log("Create user-"+docs);
             if(null != err){
                 db.close();
                 callback(false);
@@ -89,9 +91,12 @@ var getUsers = function(req,callback){
     var limit = (null != req.query.limit) ? req.query.limit : 10;
     var page = (null != req.query.page) ? --req.query.page : 0;
     var skip = limit * page;
+    
     MongoClient.connect(mongoUrl,function(err,db){
         var collection = db.collection('profile');
         var filter = buildFilter(req);
+        console.log("Filter - "+JSON.stringify(filter));
+        console.log('limit-'+limit+", page-"+page);
         collection.find(filter,{"limit":limit,"skip":skip}).toArray(function(err,data){
             db.close();
            callback(data);

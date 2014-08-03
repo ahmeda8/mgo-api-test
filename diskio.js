@@ -14,6 +14,7 @@ var onlyFiles = function (path,callback){
         var fileList = [];
         files.forEach(function(item,index){
             fs.stat(path+"/"+item,function(err,stats){
+                console.error("Read Files err-"+err);
                 if(null == err){
                     if(stats.isFile()){
                         fileList.push(item);

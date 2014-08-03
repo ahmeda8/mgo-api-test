@@ -49,15 +49,15 @@ exports.Files = function(test){
     var path = "./";
     diskio.listall(path,function(err,files){
         test.ok((files.length > 0),"Test more than 1 file exists");
-      
     });
+    
     diskio.listall(path,function(err,files){
         test.equal((files.length <= 0),false,"Test less than 1 file exists");
       test.done();
     });
 };
 
-/*
+
 exports.DBStatus = function(test){
     process.env.mongoUrl = (process.env.MONGOHQ_URL)? process.env.MONGOHQ_URL :"mongodb://localhost:27017/mgo";
     var status = require('./status.js');
@@ -67,4 +67,3 @@ exports.DBStatus = function(test){
         test.done();
     });
 };
-*/

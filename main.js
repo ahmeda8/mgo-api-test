@@ -18,6 +18,7 @@ var getApiEndpoint =function(path){
 };
 
 app.get(getApiEndpoint("user/auth"),function(req,res){
+    console.log("API Called AUTH GET");
     var user = req.query.user;
     var pass = req.query.pass;
     var version = req.param('version');
@@ -31,6 +32,7 @@ app.get(getApiEndpoint("user/auth"),function(req,res){
 });
 
 app.post(getApiEndpoint('user/auth'),function(req,res){
+    console.log("API Called AUTH POST");
     var user = req.body.user;
     var pass = req.body.pass;
     var version = req.param('version');
@@ -47,6 +49,7 @@ app.post(getApiEndpoint('user/auth'),function(req,res){
 app.post(getApiEndpoint('user'),function(req,res){
     var version = req.param('version');
     console.log("API Version="+version);
+    console.log("API Called create User POST");
     users.createUser(req.query.user,req.query.pass,function(data){
         if(data == false){
             res.send('Not Created '+JSON.stringify(req.query.user));
@@ -63,6 +66,7 @@ Endpoint to retrieve filtered user info, and pagination included
 app.get(getApiEndpoint('users'),function(req,res){
     var version = req.param('version');
     console.log("API Version="+version);
+    console.log("API Called All Users GET");
     users.getUsers(req,function(data){
        res.send(data);
     });
@@ -74,6 +78,7 @@ var status = require('./status.js');
 app.get(getApiEndpoint('status'),function(req,res){
     var version = req.param('version');
     console.log("API Version="+version);
+    console.log("API Called Status GET");
     status.mongoStatus(function(result){
        res.send(result);
     });
@@ -84,6 +89,7 @@ Endpoints for file listings
 app.get(getApiEndpoint('listdir'),function(req,res){
     var version = req.param('version');
     console.log("API Version="+version);
+    console.log("API Called LISTDIR GET");
     var path = "/"+req.query.path;
     diskio.listall(path,function(err,files){
         res.send(JSON.stringify(files));
@@ -94,6 +100,7 @@ app.get(getApiEndpoint('listdir'),function(req,res){
 app.get(getApiEndpoint('listfiles'),function(req,res){
     var version = req.param('version');
     console.log("API Version="+version);
+    console.log("API Called ListFiles GET");
     var path = "/"+req.query.path;
     diskio.listfiles(path,function(files){
         res.send(JSON.stringify(files));
