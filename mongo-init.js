@@ -1,5 +1,5 @@
 conn  = new Mongo();
-db = conn.getDB();
+db = conn.getDB("mgo");
 db.dropDatabase();
 db = conn.getDB("mgo");
 
