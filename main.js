@@ -109,4 +109,6 @@ app.get(getApiEndpoint('listfiles'),function(req,res){
 });
 
 var port = Number(process.env.PORT || 5000);
+console.log("Staring server.");
+console.log("Listening on port: "+port);
 app.listen(port);
